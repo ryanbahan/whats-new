@@ -28,7 +28,12 @@ class App extends Component {
     return this.setState({activeTopic: e.target.className});
   }
 
-  getActiveArticles() {
+  displaySearchResults(e) {
+    const regex = new RegExp(e.target.value, 'i')
+    console.log(regex);
+  }
+
+  getActiveArticles(e) {
     if (this.state.activeTopic) {
       return this.state.news[this.state.activeTopic]
     } else {
@@ -44,7 +49,7 @@ class App extends Component {
           clickHandler={this.changeTopicView}
         />
         <div className="main-content-wrapper">
-          <SearchForm />
+          <SearchForm displaySearchResults={this.displaySearchResults}/>
           <NewsContainer articles={this.getActiveArticles()}/>
         </div>
       </div>
