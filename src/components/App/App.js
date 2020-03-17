@@ -2,32 +2,21 @@ import React, { Component } from 'react';
 import Menu from '../Menu/Menu';
 import NewsContainer from '../NewsContainer/NewsContainer';
 import SearchForm from '../SearchForm/SearchForm';
-import entertainment from '../../data/entertainment';
-import health from '../../data/health';
-import local from '../../data/local';
-import science from '../../data/science';
-import technology from '../../data/technology';
 import './App.css';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      news: {
-        entertainment,
-        health,
-        local,
-        science,
-        technology
-      },
-      activeItems: {
-        entertainment,
-        health,
-        local,
-        science,
-        technology
-      },
+      news: {},
+      activeItems: {},
     }
+  }
+
+  componentDidMount() {
+    fetch('https://whats-new-api.herokuapp.com/api/v1/news')
+      .then(response => response.json())
+      .then(data => this.setState({news: data, activeItems: data}))
   }
 
   changeTopicView = (e) => {
