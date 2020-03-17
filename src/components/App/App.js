@@ -15,38 +15,42 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://newsapi.org/v2/everything?q=all&apiKey=0c233b7671024689a5e269b225a9122e`)
-      .then(response => response.json())
-      .then(data => this.setState({articles: data.articles}))
-  }
-
-  componentDidUpdate() {
+    console.log('mounted');
     fetch(`http://newsapi.org/v2/everything?q=${this.state.currentTopic}&apiKey=0c233b7671024689a5e269b225a9122e`)
       .then(response => response.json())
       .then(data => this.setState({articles: data.articles}))
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.state.currentTopic !== tstate.currentTopic) {
+      this.loadData(this.props.personId);
+    }
+  }
+
   changeTopicView = (e) => {
     this.setState({currentTopic: e.target.className});
+    console.log(this.state);
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const articles = Array.from(Object.values(this.state.activeItems)).flat();
+    const articles = this.state.articles;
     const searchResults = articles.filter(
       item => {
         return item.title.match(
         new RegExp(e.target.children[0].value, 'i')
       )}
   );
-    this.setState({activeItems: searchResults});
+  console.log(searchResults);
+    this.setState({articles: searchResults});
   }
 
   resetPage = (e) => {
-    this.setState({activeItems: this.state.news});
+    this.setState({currentTopic: "all"});
   }
 
   render () {
+    console.log(this.state);
     return (
       <div className="app">
         <Menu
