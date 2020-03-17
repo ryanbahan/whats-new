@@ -23,16 +23,6 @@ class App extends Component {
     this.setState({activeItems: this.state.news[e.target.className]});
   }
 
-  getSearchResults = (activeItems) => {
-    const articles = Array.from(Object.values(this.state.activeItems)).flat();
-
-    const matches = articles.filter(article => {
-      return article.headline.match(this.state.searchQuery)
-    })
-
-    return matches;
-  }
-
   handleSubmit = (e) => {
     e.preventDefault();
     const articles = Array.from(Object.values(this.state.activeItems)).flat();
