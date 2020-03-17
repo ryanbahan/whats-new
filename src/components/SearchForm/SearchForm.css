@@ -12,6 +12,7 @@
   font-size: 1.25rem;
   background-color: #fff;
   padding: 0.5%;
+  min-width: 100px;
 }
 
 .search-field-container input {

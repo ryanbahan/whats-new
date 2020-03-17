@@ -20,6 +20,13 @@ class App extends Component {
         science,
         technology
       },
+      activeItems: {
+        entertainment,
+        health,
+        local,
+        science,
+        technology
+      },
       activeTopic: null,
       searchQuery: null
     }
