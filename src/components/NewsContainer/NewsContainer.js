@@ -13,8 +13,6 @@ const NewsContainer = (props) => {
     return allArticles;
   }, []).flat();
 
-  console.log(articles);
-
   return <main>
     {articles.map(article =>
       <NewsArticle

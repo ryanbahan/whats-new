@@ -4,7 +4,7 @@ import './Menu.css'
 class Menu extends React.Component {
 
   getMenuItems(props) {
-    return props.map(item => (<li key={item}>{item}</li>))
+    return props.map(item => (<li key={item} className={item} onClick={this.props.clickHandler}>{item}</li>))
   }
 
   render() {
