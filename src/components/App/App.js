@@ -20,25 +20,44 @@ class App extends Component {
         science,
         technology
       },
-      activeTopic: null
+      activeItems: {
+        entertainment,
+        health,
+        local,
+        science,
+        technology
+      },
     }
   }
 
   changeTopicView = (e) => {
-    return this.setState({activeTopic: e.target.className});
+    this.setState({activeItems: this.state.news[e.target.className]});
   }
 
-  displaySearchResults(e) {
-    const regex = new RegExp(e.target.value, 'i')
-    console.log(regex);
+  getSearchResults = (activeItems) => {
+    const articles = Array.from(Object.values(this.state.activeItems)).flat();
+
+    const matches = articles.filter(article => {
+      return article.headline.match(this.state.searchQuery)
+    })
+
+    return matches;
   }
 
-  getActiveArticles(e) {
-    if (this.state.activeTopic) {
-      return this.state.news[this.state.activeTopic]
-    } else {
-      return this.state.news
-    }
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const articles = Array.from(Object.values(this.state.activeItems)).flat();
+    const searchResults = articles.filter(
+      item => item.headline.match(
+        new RegExp(e.target.children[0].value, 'i')
+      )
+    );
+
+    this.setState({activeItems: searchResults});
+  }
+
+  resetPage = (e) => {
+    this.setState({activeItems: this.state.news});
   }
 
   render () {
@@ -47,10 +66,11 @@ class App extends Component {
         <Menu
           items={Object.keys(this.state.news)}
           clickHandler={this.changeTopicView}
+          resetPage={this.resetPage}
         />
         <div className="main-content-wrapper">
-          <SearchForm displaySearchResults={this.displaySearchResults}/>
-          <NewsContainer articles={this.getActiveArticles()}/>
+          <SearchForm handleSubmit={this.handleSubmit} />
+          <NewsContainer articles={this.state.activeItems} />
         </div>
       </div>
     );

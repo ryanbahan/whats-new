@@ -2,10 +2,10 @@ import React from 'react';
 import './SearchForm.css';
 
 function SearchForm(props) {
-  return <section className="search-field-container">
-      <input type="text" onChange={props.displaySearchResults}/>
+  return <form className="search-field-container" onSubmit={props.handleSubmit}>
+      <input type="text" />
       <button type="submit">Submit</button>
-    </section>
+    </form>
 }
 
 export default SearchForm;

@@ -10,7 +10,7 @@ class Menu extends React.Component {
   render() {
     return <nav>
     <div className="title-container">
-      <h1>What's New?</h1>
+      <h1 onClick={this.props.resetPage}>What's New?</h1>
     </div>
       <ul className="menu-items">
         {this.getMenuItems(this.props.items)}
