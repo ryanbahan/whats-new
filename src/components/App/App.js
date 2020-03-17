@@ -19,17 +19,33 @@ class App extends Component {
         local,
         science,
         technology
-      }
+      },
+      activeTopic: null
+    }
+  }
+
+  changeTopicView = (e) => {
+    return this.setState({activeTopic: e.target.className});
+  }
+
+  getActiveArticles() {
+    if (this.state.activeTopic) {
+      return this.state.news[this.state.activeTopic]
+    } else {
+      return this.state.news
     }
   }
 
   render () {
     return (
       <div className="app">
-        <Menu items={Object.keys(this.state.news)}/>
+        <Menu
+          items={Object.keys(this.state.news)}
+          clickHandler={this.changeTopicView}
+        />
         <div className="main-content-wrapper">
           <SearchForm />
-          <NewsContainer articles={this.state.news}/>
+          <NewsContainer articles={this.getActiveArticles()}/>
         </div>
       </div>
     );
