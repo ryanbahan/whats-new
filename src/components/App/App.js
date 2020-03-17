@@ -14,9 +14,45 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('https://whats-new-api.herokuapp.com/api/v1/news')
-      .then(response => response.json())
-      .then(data => this.setState({news: data, activeItems: data}))
+    fetch('http://newsapi.org/v2/everything?q=science&apiKey=0c233b7671024689a5e269b225a9122e')
+    .then(response => response.json())
+    .then(data => {
+      const changedTopic = {...this.state.news};
+      changedTopic.science = data.articles;
+      this.setState({news: changedTopic, activeItems: changedTopic})
+    })
+
+    fetch('http://newsapi.org/v2/everything?q=local&apiKey=0c233b7671024689a5e269b225a9122e')
+    .then(response => response.json())
+    .then(data => {
+      const changedTopic = {...this.state.news};
+      changedTopic.local = data.articles;
+      this.setState({news: changedTopic, activeItems: changedTopic})
+    })
+
+    fetch('http://newsapi.org/v2/everything?q=entertainment&apiKey=0c233b7671024689a5e269b225a9122e')
+    .then(response => response.json())
+    .then(data => {
+      const changedTopic = {...this.state.news};
+      changedTopic.entertainment = data.articles;
+      this.setState({news: changedTopic, activeItems: changedTopic})
+    })
+
+    fetch('http://newsapi.org/v2/everything?q=health&apiKey=0c233b7671024689a5e269b225a9122e')
+    .then(response => response.json())
+    .then(data => {
+      const changedTopic = {...this.state.news};
+      changedTopic.health = data.articles;
+      this.setState({news: changedTopic, activeItems: changedTopic})
+    })
+
+    fetch('http://newsapi.org/v2/everything?q=technology&apiKey=0c233b7671024689a5e269b225a9122e')
+    .then(response => response.json())
+    .then(data => {
+      const changedTopic = {...this.state.news};
+      changedTopic.technology = data.articles;
+      this.setState({news: changedTopic, activeItems: changedTopic})
+    })
   }
 
   changeTopicView = (e) => {
@@ -27,11 +63,11 @@ class App extends Component {
     e.preventDefault();
     const articles = Array.from(Object.values(this.state.activeItems)).flat();
     const searchResults = articles.filter(
-      item => item.headline.match(
+      item => {
+        return item.title.match(
         new RegExp(e.target.children[0].value, 'i')
-      )
+      )}
   );
-
     this.setState({activeItems: searchResults});
   }
 

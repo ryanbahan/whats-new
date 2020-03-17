@@ -16,9 +16,9 @@ const NewsContainer = (props) => {
   return <main>
     {articles.map(article =>
       <NewsArticle
-        key={article.url}
-        headline={article.headline}
-        img={article.img}
+        key={article.publishedAt}
+        headline={article.title}
+        img={article.urlToImage}
         description={article.description}
         url={article.url}
       />
