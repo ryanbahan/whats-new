@@ -7,7 +7,6 @@
 .app {
   display: flex;
   height: 100vh;
-  padding-top: 0.5%;
   overflow: hidden;
 }
 
