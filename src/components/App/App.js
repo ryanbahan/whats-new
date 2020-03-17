@@ -20,7 +20,8 @@ class App extends Component {
         science,
         technology
       },
-      activeTopic: null
+      activeTopic: null,
+      searchQuery: null
     }
   }
 
@@ -28,17 +29,36 @@ class App extends Component {
     return this.setState({activeTopic: e.target.className});
   }
 
-  displaySearchResults(e) {
-    const regex = new RegExp(e.target.value, 'i')
-    console.log(regex);
+  getSearchResults = (activeItems) => {
+    let articles = Object.keys(activeItems);
+    articles = articles.map(article => activeItems[article]).flat();
+
+    let matches = articles.filter(article => {
+      return article.headline.match(this.state.searchQuery)
+    })
+
+    return matches;
   }
 
-  getActiveArticles(e) {
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.setState({searchQuery: new RegExp(e.target.children[0].value, 'i')})
+  }
+
+  getActiveArticles() {
+    let articles;
+
     if (this.state.activeTopic) {
-      return this.state.news[this.state.activeTopic]
+      articles = this.state.news[this.state.activeTopic]
     } else {
-      return this.state.news
+      articles = this.state.news
     }
+
+    if (this.state.searchQuery) {
+      articles = this.getSearchResults(articles);
+    }
+
+    return articles;
   }
 
   render () {
@@ -49,8 +69,8 @@ class App extends Component {
           clickHandler={this.changeTopicView}
         />
         <div className="main-content-wrapper">
-          <SearchForm displaySearchResults={this.displaySearchResults}/>
-          <NewsContainer articles={this.getActiveArticles()}/>
+          <SearchForm handleSubmit={this.handleSubmit} />
+          <NewsContainer articles={this.getActiveArticles()} />
         </div>
       </div>
     );
