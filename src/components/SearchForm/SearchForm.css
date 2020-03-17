@@ -1,8 +1,18 @@
 .search-field-container {
-  border: solid 1px black;
   height: 10vh;
   min-height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 2.5%;
+}
+
+.search-field-container button {
+  font-size: 1.25rem;
+  background-color: #fff;
+  padding: 0.5%;
+}
+
+.search-field-container input {
+  font-size: 1.25rem;
 }

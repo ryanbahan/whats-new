@@ -2,9 +2,6 @@ import React from 'react';
 import './Menu.css'
 
 class Menu extends React.Component {
-  constructor() {
-    super()
-  }
 
   getMenuItems(props) {
     return props.map(item => (<li key={item}>{item}</li>))

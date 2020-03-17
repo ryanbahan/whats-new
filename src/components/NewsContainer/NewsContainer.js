@@ -1,8 +1,30 @@
 import React from 'react';
+import NewsArticle from '../NewsArticle/NewsArticle';
 import './NewsContainer.css'
 
-function NewsContainer(props) {
+const NewsContainer = (props) => {
+  const articleTopics = Object.keys(props.articles);
+
+  const articles = articleTopics.reduce(
+
+    (allArticles, articleTopic) => {
+    allArticles.push(props.articles[articleTopic]);
+
+    return allArticles;
+  }, []).flat();
+
+  console.log(articles);
+
   return <main>
+    {articles.map(article =>
+      <NewsArticle
+        key={article.url}
+        headline={article.headline}
+        img={article.img}
+        description={article.description}
+        url={article.url}
+      />
+    )}
   </main>
 }
 
