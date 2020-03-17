@@ -27,7 +27,6 @@ class App extends Component {
         science,
         technology
       },
-      searchQuery: null
     }
   }
 
@@ -48,17 +47,16 @@ class App extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({searchQuery: new RegExp(e.target.children[0].value, 'i')})
-  }
+    let articles = Object.keys(this.state.activeItems);
+    articles = articles.map(article => this.state.activeItems[article]).flat();
 
-  getActiveArticles() {
-    let articles = this.state.activeItems;
-
-    if (this.state.searchQuery) {
-      articles = this.getSearchResults(articles);
-    }
-
-    return articles;
+    let searchResults = articles.filter(
+      item => item.headline.match(
+        new RegExp(e.target.children[0].value, 'i')
+      )
+    );
+    
+    this.setState({activeItems: searchResults});
   }
 
   render () {
@@ -70,7 +68,7 @@ class App extends Component {
         />
         <div className="main-content-wrapper">
           <SearchForm handleSubmit={this.handleSubmit} />
-          <NewsContainer articles={this.getActiveArticles()} />
+          <NewsContainer articles={this.state.activeItems} />
         </div>
       </div>
     );
