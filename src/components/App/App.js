@@ -8,84 +8,61 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      news: {},
-      activeItems: {},
+      topics: ["entertainment", "local", "health", "technology", "science"],
+      currentTopic: "all",
+      articles: []
     }
   }
 
   componentDidMount() {
-    fetch('http://newsapi.org/v2/everything?q=science&apiKey=0c233b7671024689a5e269b225a9122e')
-    .then(response => response.json())
-    .then(data => {
-      const changedTopic = {...this.state.news};
-      changedTopic.science = data.articles;
-      this.setState({news: changedTopic, activeItems: changedTopic})
-    })
+    this.getArticlesByTopic();
+  }
 
-    fetch('http://newsapi.org/v2/everything?q=local&apiKey=0c233b7671024689a5e269b225a9122e')
-    .then(response => response.json())
-    .then(data => {
-      const changedTopic = {...this.state.news};
-      changedTopic.local = data.articles;
-      this.setState({news: changedTopic, activeItems: changedTopic})
-    })
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.currentTopic !== prevState.currentTopic) {
+      this.getArticlesByTopic();
+    }
+  }
 
-    fetch('http://newsapi.org/v2/everything?q=entertainment&apiKey=0c233b7671024689a5e269b225a9122e')
-    .then(response => response.json())
-    .then(data => {
-      const changedTopic = {...this.state.news};
-      changedTopic.entertainment = data.articles;
-      this.setState({news: changedTopic, activeItems: changedTopic})
-    })
-
-    fetch('http://newsapi.org/v2/everything?q=health&apiKey=0c233b7671024689a5e269b225a9122e')
-    .then(response => response.json())
-    .then(data => {
-      const changedTopic = {...this.state.news};
-      changedTopic.health = data.articles;
-      this.setState({news: changedTopic, activeItems: changedTopic})
-    })
-
-    fetch('http://newsapi.org/v2/everything?q=technology&apiKey=0c233b7671024689a5e269b225a9122e')
-    .then(response => response.json())
-    .then(data => {
-      const changedTopic = {...this.state.news};
-      changedTopic.technology = data.articles;
-      this.setState({news: changedTopic, activeItems: changedTopic})
-    })
+  getArticlesByTopic() {
+    fetch(`http://newsapi.org/v2/everything?q=${this.state.currentTopic}&apiKey=0c233b7671024689a5e269b225a9122e`)
+      .then(response => response.json())
+      .then(data => this.setState({articles: data.articles}))
   }
 
   changeTopicView = (e) => {
-    this.setState({activeItems: this.state.news[e.target.className]});
+    this.setState({currentTopic: e.target.className});
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const articles = Array.from(Object.values(this.state.activeItems)).flat();
+    const articles = this.state.articles;
     const searchResults = articles.filter(
       item => {
         return item.title.match(
         new RegExp(e.target.children[0].value, 'i')
       )}
   );
-    this.setState({activeItems: searchResults});
+  console.log(searchResults);
+    this.setState({articles: searchResults});
   }
 
   resetPage = (e) => {
-    this.setState({activeItems: this.state.news});
+    this.setState({currentTopic: "all"});
+    this.getArticlesByTopic();
   }
 
   render () {
     return (
       <div className="app">
         <Menu
-          items={Object.keys(this.state.news)}
+          items={this.state.topics}
           clickHandler={this.changeTopicView}
           resetPage={this.resetPage}
         />
         <div className="main-content-wrapper">
           <SearchForm handleSubmit={this.handleSubmit} />
-          <NewsContainer articles={this.state.activeItems} />
+          <NewsContainer articles={this.state.articles} />
         </div>
       </div>
     );
