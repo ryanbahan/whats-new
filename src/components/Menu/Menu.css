@@ -32,6 +32,8 @@ nav ul {
 nav li {
   width: 55%;
   margin: 5% 0;
+  padding-bottom: 2.5%;
   text-transform: capitalize;
   cursor: pointer;
+  border-bottom: solid 1px black;
 }
