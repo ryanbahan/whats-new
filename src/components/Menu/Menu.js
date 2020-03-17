@@ -1,6 +1,10 @@
 import React from 'react';
 import './Menu.css'
 
-// MENU COMPONENT CODE GOES HERE
+function Menu(props) {
+  return <nav>
+    
+  </nav>;
+}
 
 export default Menu;
