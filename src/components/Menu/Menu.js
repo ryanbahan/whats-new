@@ -9,7 +9,7 @@ class Menu extends React.Component {
 
   render() {
     return <nav>
-    <div class="title-container">
+    <div className="title-container">
       <h1>What's New?</h1>
     </div>
       <ul className="menu-items">

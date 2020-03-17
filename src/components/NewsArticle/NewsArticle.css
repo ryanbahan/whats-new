@@ -9,10 +9,11 @@
 .news-article-card img {
   width: 100%;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .news-article-card h3,
 .news-article-card p,
-.news-article-card a {
+.bottom-link {
   padding: 5%;
 }
