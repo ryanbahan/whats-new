@@ -35,10 +35,9 @@ class App extends Component {
   }
 
   getSearchResults = (activeItems) => {
-    let articles = Object.keys(activeItems);
-    articles = articles.map(article => activeItems[article]).flat();
+    const articles = Array.from(Object.values(this.state.activeItems)).flat();
 
-    let matches = articles.filter(article => {
+    const matches = articles.filter(article => {
       return article.headline.match(this.state.searchQuery)
     })
 
@@ -47,10 +46,8 @@ class App extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    let articles = Object.keys(this.state.activeItems);
-    articles = articles.map(article => this.state.activeItems[article]).flat();
-
-    let searchResults = articles.filter(
+    const articles = Array.from(Object.values(this.state.activeItems)).flat();
+    const searchResults = articles.filter(
       item => item.headline.match(
         new RegExp(e.target.children[0].value, 'i')
       )
