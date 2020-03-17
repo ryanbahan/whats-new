@@ -15,21 +15,23 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log('mounted');
+    this.getArticlesByTopic();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.currentTopic !== prevState.currentTopic) {
+      this.getArticlesByTopic();
+    }
+  }
+
+  getArticlesByTopic() {
     fetch(`http://newsapi.org/v2/everything?q=${this.state.currentTopic}&apiKey=0c233b7671024689a5e269b225a9122e`)
       .then(response => response.json())
       .then(data => this.setState({articles: data.articles}))
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.state.currentTopic !== tstate.currentTopic) {
-      this.loadData(this.props.personId);
-    }
-  }
-
   changeTopicView = (e) => {
     this.setState({currentTopic: e.target.className});
-    console.log(this.state);
   }
 
   handleSubmit = (e) => {
@@ -47,10 +49,10 @@ class App extends Component {
 
   resetPage = (e) => {
     this.setState({currentTopic: "all"});
+    this.getArticlesByTopic();
   }
 
   render () {
-    console.log(this.state);
     return (
       <div className="app">
         <Menu
