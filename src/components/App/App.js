@@ -31,7 +31,7 @@ class App extends Component {
   }
 
   changeTopicView = (e) => {
-    return this.setState({activeItems: this.state.news[e.target.className]});
+    this.setState({activeItems: this.state.news[e.target.className]});
   }
 
   getSearchResults = (activeItems) => {
@@ -55,8 +55,12 @@ class App extends Component {
         new RegExp(e.target.children[0].value, 'i')
       )
     );
-    
+
     this.setState({activeItems: searchResults});
+  }
+
+  resetPage = (e) => {
+    this.setState({activeItems: this.state.news});
   }
 
   render () {
@@ -65,6 +69,7 @@ class App extends Component {
         <Menu
           items={Object.keys(this.state.news)}
           clickHandler={this.changeTopicView}
+          resetPage={this.resetPage}
         />
         <div className="main-content-wrapper">
           <SearchForm handleSubmit={this.handleSubmit} />
