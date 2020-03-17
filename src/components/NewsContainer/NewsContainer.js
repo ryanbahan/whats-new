@@ -13,7 +13,7 @@ const NewsContainer = (props) => {
     return allArticles;
   }, []).flat();
 
-  return <main>
+  return (<main>
     {articles.map(article =>
       <NewsArticle
         key={(Date.now() - (Math.random() * Math.floor(10000)))}
@@ -23,7 +23,7 @@ const NewsContainer = (props) => {
         url={article.url}
       />
     )}
-  </main>
+  </main>)
 }
 
 export default NewsContainer;
