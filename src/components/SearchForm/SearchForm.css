@@ -1,0 +1,8 @@
+.search-field-container {
+  border: solid 1px black;
+  height: 10vh;
+  min-height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -6,8 +6,9 @@
 
 .app {
   display: flex;
-  background: #141527;
-  height: 100vh;
-  text-align: center;
-  width: 100%;
+}
+
+.main-content-wrapper {
+  border: solid 1px black;
+  flex-grow: 1;
 }

@@ -26,11 +26,11 @@ class App extends Component {
   render () {
     return (
       <div className="app">
+        <Menu items={Object.keys(this.state.news)}/>
         <div className="main-content-wrapper">
           <SearchForm />
           <NewsContainer articles={this.state.news}/>
         </div>
-          <Menu items={Object.keys(this.state.news)}/>
       </div>
     );
   }
