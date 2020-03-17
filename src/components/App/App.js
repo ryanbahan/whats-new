@@ -27,13 +27,12 @@ class App extends Component {
         science,
         technology
       },
-      activeTopic: null,
       searchQuery: null
     }
   }
 
   changeTopicView = (e) => {
-    return this.setState({activeTopic: e.target.className});
+    return this.setState({activeItems: this.state.news[e.target.className]});
   }
 
   getSearchResults = (activeItems) => {
@@ -53,13 +52,7 @@ class App extends Component {
   }
 
   getActiveArticles() {
-    let articles;
-
-    if (this.state.activeTopic) {
-      articles = this.state.news[this.state.activeTopic]
-    } else {
-      articles = this.state.news
-    }
+    let articles = this.state.activeItems;
 
     if (this.state.searchQuery) {
       articles = this.getSearchResults(articles);
