@@ -30,7 +30,7 @@ class App extends Component {
       item => item.headline.match(
         new RegExp(e.target.children[0].value, 'i')
       )
-    );
+  );
 
     this.setState({activeItems: searchResults});
   }
