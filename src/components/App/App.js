@@ -26,7 +26,7 @@ class App extends Component {
       .then(data => this.setState({articles: data.articles, isLoading: false}))
   }
 
-  changeTopicView = (e) => {
+  changeTopic = (e) => {
     this.getArticlesByTopic(e.target.className);
   }
 
@@ -44,7 +44,36 @@ class App extends Component {
     this.getArticlesByTopic();
   }
 
+  getLocation() {
+    if ("geolocation" in navigator) {
+      var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      };
+
+      function success(pos) {
+        var crd = pos.coords;
+
+        console.log('Your current position is:');
+        console.log(`Latitude : ${crd.latitude}`);
+        console.log(`Longitude: ${crd.longitude}`);
+        console.log(`More or less ${crd.accuracy} meters.`);
+      }
+
+      function error(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+      }
+
+      navigator.geolocation.getCurrentPosition(success, error, options)
+    } else {
+      /* geolocation IS NOT available */
+    }
+  }
+
   render () {
+    this.getLocation();
+    
     if (this.state.isLoading) {
       return <p>loading</p>
     } else {
@@ -52,7 +81,7 @@ class App extends Component {
           <div className="app">
             <Menu
               items={this.state.defaultTopics}
-              clickHandler={this.changeTopicView}
+              clickHandler={this.changeTopic}
               resetPage={this.resetPage}
             />
             <div className="main-content-wrapper">
