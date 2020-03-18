@@ -29,7 +29,11 @@ class App extends Component {
   }
 
   changeTopic = (e) => {
-    this.getArticlesByTopic(e.target.className);
+    if (e.target.className === 'local') {
+      this.getArticlesByTopic(this.state.location)
+    } else {
+      this.getArticlesByTopic(e.target.className);
+    }
   }
 
   searchArticles = (newQuery) => {
@@ -63,7 +67,6 @@ class App extends Component {
   }
 
   render () {
-    console.log(this.state);
     if (this.state.isLoading) {
       return <p>loading</p>
     } else {
