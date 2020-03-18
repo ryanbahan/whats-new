@@ -11,11 +11,13 @@ class App extends Component {
       defaultTopics: ["entertainment", "local", "health", "technology", "science"],
       articles: [],
       isLoading: false,
+      location: null
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.getArticlesByTopic();
+    await this.getCity();
   }
 
   getArticlesByTopic(topic = "all") {
@@ -27,7 +29,11 @@ class App extends Component {
   }
 
   changeTopic = (e) => {
-    this.getArticlesByTopic(e.target.className);
+    if (e.target.className === 'local') {
+      this.getArticlesByTopic(this.state.location)
+    } else {
+      this.getArticlesByTopic(e.target.className);
+    }
   }
 
   searchArticles = (newQuery) => {
@@ -44,36 +50,23 @@ class App extends Component {
     this.getArticlesByTopic();
   }
 
-  getLocation() {
-    if ("geolocation" in navigator) {
-      var options = {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0
-      };
+  getCity() {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      logCoords(position.coords.latitude, position.coords.longitude);
+    });
 
-      function success(pos) {
-        var crd = pos.coords;
-
-        console.log('Your current position is:');
-        console.log(`Latitude : ${crd.latitude}`);
-        console.log(`Longitude: ${crd.longitude}`);
-        console.log(`More or less ${crd.accuracy} meters.`);
-      }
-
-      function error(err) {
-        console.warn(`ERROR(${err.code}): ${err.message}`);
-      }
-
-      navigator.geolocation.getCurrentPosition(success, error, options)
-    } else {
-      /* geolocation IS NOT available */
+    const logCoords = (newLat, newLong) => {
+      this.getCoordinates(newLat, newLong)
     }
   }
 
+  getCoordinates(lat, long) {
+    fetch(`http://open.mapquestapi.com/geocoding/v1/reverse?key=NKOBALGUOCANiz2Y4vAhG6D8nDli2aVI&location=${lat},${long}`)
+      .then(res => res.json())
+      .then(data => this.setState({location: data.results[0].locations[0].adminArea5}))
+  }
+
   render () {
-    this.getLocation();
-    
     if (this.state.isLoading) {
       return <p>loading</p>
     } else {
