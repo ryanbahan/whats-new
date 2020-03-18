@@ -8,26 +8,29 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      topics: ["entertainment", "local", "health", "technology", "science"],
+      defaultTopics: ["entertainment", "local", "health", "technology", "science"],
       currentTopic: "all",
-      articles: []
+      articles: [],
+      isLoading: false,
     }
   }
 
   componentDidMount() {
+    this.setState({ isLoading: true });
     this.getArticlesByTopic();
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.currentTopic !== prevState.currentTopic) {
+      this.setState({ isLoading: true });
       this.getArticlesByTopic();
     }
   }
 
   getArticlesByTopic() {
-    fetch(`http://newsapi.org/v2/everything?q=${this.state.currentTopic}&apiKey=0c233b7671024689a5e269b225a9122e`)
+    fetch(`http://newsapi.org/v2/everything?q=${this.state.currentTopic}&pageSize=100&apiKey=0c233b7671024689a5e269b225a9122e`)
       .then(response => response.json())
-      .then(data => this.setState({articles: data.articles}))
+      .then(data => this.setState({articles: data.articles, isLoading: false}))
   }
 
   changeTopicView = (e) => {
@@ -43,29 +46,32 @@ class App extends Component {
         new RegExp(e.target.children[0].value, 'i')
       )}
   );
-  console.log(searchResults);
     this.setState({articles: searchResults});
   }
 
   resetPage = (e) => {
-    this.setState({currentTopic: "all"});
+    this.setState({currentTopic: "all", isLoading: true});
     this.getArticlesByTopic();
   }
 
   render () {
-    return (
-      <div className="app">
-        <Menu
-          items={this.state.topics}
-          clickHandler={this.changeTopicView}
-          resetPage={this.resetPage}
-        />
-        <div className="main-content-wrapper">
-          <SearchForm handleSubmit={this.handleSubmit} />
-          <NewsContainer articles={this.state.articles} />
-        </div>
-      </div>
-    );
+    if (this.state.isLoading) {
+      return <p>loading</p>
+    } else {
+        return (
+          <div className="app">
+            <Menu
+              items={this.state.defaultTopics}
+              clickHandler={this.changeTopicView}
+              resetPage={this.resetPage}
+            />
+            <div className="main-content-wrapper">
+              <SearchForm handleSubmit={this.handleSubmit} />
+              <NewsContainer articles={this.state.articles} />
+            </div>
+          </div>
+        );
+      }
   }
 }
 
