@@ -29,7 +29,7 @@ class App extends Component {
   }
 
   changeTopic = (e) => {
-    if (e.target.className === 'local') {
+    if (e.target.className === 'local' && this.location !== null) {
       this.getArticlesByTopic(this.state.location)
     } else {
       this.getArticlesByTopic(e.target.className);
@@ -56,11 +56,11 @@ class App extends Component {
     });
 
     const logCoords = (newLat, newLong) => {
-      this.getCoordinates(newLat, newLong)
+      this.getCityFromCoordinates(newLat, newLong)
     }
   }
 
-  getCoordinates(lat, long) {
+  getCityFromCoordinates(lat, long) {
     fetch(`http://open.mapquestapi.com/geocoding/v1/reverse?key=NKOBALGUOCANiz2Y4vAhG6D8nDli2aVI&location=${lat},${long}`)
       .then(res => res.json())
       .then(data => this.setState({location: data.results[0].locations[0].adminArea5}))
