@@ -9,32 +9,25 @@ class App extends Component {
     super();
     this.state = {
       defaultTopics: ["entertainment", "local", "health", "technology", "science"],
-      currentTopic: "all",
       articles: [],
       isLoading: false,
     }
   }
 
   componentDidMount() {
-    this.setState({ isLoading: true });
     this.getArticlesByTopic();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.currentTopic !== prevState.currentTopic) {
-      this.setState({ isLoading: true });
-      this.getArticlesByTopic();
-    }
-  }
+  getArticlesByTopic(topic = "all") {
+    this.setState({ isLoading: true });
 
-  getArticlesByTopic() {
-    fetch(`http://newsapi.org/v2/everything?q=${this.state.currentTopic}&pageSize=100&apiKey=0c233b7671024689a5e269b225a9122e`)
+    fetch(`http://newsapi.org/v2/everything?q=${topic}&pageSize=100&apiKey=0c233b7671024689a5e269b225a9122e`)
       .then(response => response.json())
       .then(data => this.setState({articles: data.articles, isLoading: false}))
   }
 
   changeTopicView = (e) => {
-    this.setState({currentTopic: e.target.className});
+    this.getArticlesByTopic(e.target.className);
   }
 
   handleSubmit = (e) => {
@@ -50,7 +43,6 @@ class App extends Component {
   }
 
   resetPage = (e) => {
-    this.setState({currentTopic: "all", isLoading: true});
     this.getArticlesByTopic();
   }
 
