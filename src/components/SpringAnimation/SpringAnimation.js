@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
-import {useTransition, useSpring, animated} from 'react-spring'
+import {useSpring, animated} from 'react-spring'
 import './SpringAnimation.css'
+
 /*
 0 % { transform: scale(1); }
 25 % { transform: scale(.97); }
