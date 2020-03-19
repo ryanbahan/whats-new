@@ -9,6 +9,7 @@
   border-radius: 5px;
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.05);
   overflow: hidden;
+  cursor: pointer;
 }
 
 .news-article-card img {
@@ -16,22 +17,14 @@
   height: 22.5vh;
   width: 100%;
   border-radius: 5px;
-  cursor: pointer;
 }
 
 .news-article-card p {
   font-size: 0.85em;
   line-height: 1.5;
-  margin-bottom: 10%;
 }
 
 .news-article-card h3,
-.news-article-card p,
-.bottom-link {
+.news-article-card p {
   padding: 5%;
-}
-
-.bottom-link {
-  position: absolute;
-  bottom: 0;
 }
