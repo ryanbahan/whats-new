@@ -1,6 +1,6 @@
 ### What's New?
 
-[View it live!](https://ryanbahan.github.io/whats-new/)
+#### [View it live!](https://ryanbahan.github.io/whats-new/)
 
 What new is a simple & efficient news application built in React. It fetches recent news stories via the [News API](https://newsapi.org/), and serves up news in entertainment, health, technology, and science. Users can also search by topic, or view location-based news, made possible via the [Mapquest API](https://developer.mapquest.com/). 
 
