@@ -6,6 +6,12 @@ What new is a simple & efficient news application built in React. It fetches rec
 
 ![Screen Shot 2020-03-19 at 5 00 06 PM](https://user-images.githubusercontent.com/54119863/77122577-970ed800-6a03-11ea-8f3c-83d9f2405624.png)
 
+## Install
+
+- Clone down the repo
+- Run npm install via the command line
+- Run npm start via the command line
+
 ## Technologies
 
 - React
