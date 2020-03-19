@@ -14,3 +14,11 @@
   height: 100vh;
   flex-grow: 1;
 }
+
+.nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  height: 10vh;
+  min-height: 75px;
+  padding: 0 2.5%;
+}

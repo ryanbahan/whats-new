@@ -1,10 +1,8 @@
 .search-field-container {
-  min-height: 85px;
-  height: 10vh;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 0.5% 2.5% 0 2.5%;
+  padding: 0.5% 0 0 2.5%;
 }
 
 .search-field-container button {
@@ -20,6 +18,7 @@
 
 .search-field-container input {
   padding-left: 0.75%;
+  margin-right: 12.5px;
   border: solid 0.25px grey;
   font-size: 1rem;
   height: 40%;
@@ -27,6 +26,5 @@
 }
 
 .search-field-container input::placeholder {
-  /* padding-left: 5%; */
   font-style: italic;
 }
