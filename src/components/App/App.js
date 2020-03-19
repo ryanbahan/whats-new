@@ -23,7 +23,7 @@ class App extends Component {
   getArticlesByTopic(topic = "all") {
     this.setState({ isLoading: true });
 
-    fetch(`http://newsapi.org/v2/everything?q=${topic}&pageSize=100&apiKey=0c233b7671024689a5e269b225a9122e`)
+    fetch(`https://newsapi.org/v2/everything?q=${topic}&pageSize=100&apiKey=0c233b7671024689a5e269b225a9122e`)
       .then(response => response.json())
       .then(data => this.setState({articles: data.articles, isLoading: false}))
   }
@@ -61,7 +61,7 @@ class App extends Component {
   }
 
   getCityFromCoordinates(lat, long) {
-    fetch(`http://open.mapquestapi.com/geocoding/v1/reverse?key=NKOBALGUOCANiz2Y4vAhG6D8nDli2aVI&location=${lat},${long}`)
+    fetch(`https://open.mapquestapi.com/geocoding/v1/reverse?key=NKOBALGUOCANiz2Y4vAhG6D8nDli2aVI&location=${lat},${long}`)
       .then(res => res.json())
       .then(data => this.setState({location: data.results[0].locations[0].adminArea5}))
   }
