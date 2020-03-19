@@ -17,6 +17,7 @@ const NewsContainer = (props) => {
     {articles.map(article =>
       <NewsArticle
         key={(Date.now() - (Math.random() * Math.floor(10000)))}
+        source={article.source.name}
         headline={article.title}
         img={article.urlToImage}
         description={article.description}

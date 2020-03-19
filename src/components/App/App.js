@@ -67,6 +67,7 @@ class App extends Component {
   }
 
   render () {
+    console.log(this.state.articles);
     if (this.state.isLoading) {
       return <p>loading</p>
     } else {
