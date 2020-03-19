@@ -23,12 +23,13 @@ nav ul {
 }
 
 nav li {
+  font-size: 0.85em;
   font-weight: 600;
   text-transform: capitalize;
   cursor: pointer;
   margin: 0 2%;
   width: min-content;
-  padding: 0.75%;
+  padding: 0.75% 0.75%;
   border-bottom: solid 3px #fff;
 }
 
