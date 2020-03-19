@@ -13,12 +13,12 @@ class Menu extends React.Component {
 
   render() {
     return <nav>
-    <div className="title-container">
-      <h1 onClick={this.props.resetPage}>What's New?</h1>
-    </div>
-      <ul className="menu-items">
-        {this.getMenuItems(this.props.items)}
-      </ul>
+      <div className="title-container">
+        <h1 onClick={this.props.resetPage}>What's New?</h1>
+        <ul className="menu-items">
+          {this.getMenuItems(this.props.items)}
+        </ul>
+      </div>
     </nav>;
   }
 }

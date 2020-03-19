@@ -11,5 +11,6 @@
 }
 
 .main-content-wrapper {
+  height: 100vh;
   flex-grow: 1;
 }

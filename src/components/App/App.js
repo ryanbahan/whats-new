@@ -30,7 +30,7 @@ class App extends Component {
 
   changeTopic = (e) => {
     if (e.target.className === 'local' && this.location !== null) {
-      this.getArticlesByTopic(this.state.location)
+      this.getArticlesByTopic(this.state.location || 'all')
     } else {
       this.getArticlesByTopic(e.target.className);
     }

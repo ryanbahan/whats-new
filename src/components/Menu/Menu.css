@@ -1,39 +1,35 @@
 nav {
-  padding-top: 2.5px;
+  padding-top: 2%;
   height: 100vh;
-  width: 20vw;
+  width: 15vw;
   min-width: 200px;
   display: flex;
   flex-direction: column;
-  background-color: #fafafa;
-  box-shadow: 1px 2px 2px hsla(0, 0, 0, 0.15);
+  align-items: center;
+  box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 nav h1 {
   cursor: pointer;
+  padding-bottom: 20%;
+  padding-left: 15%;
 }
 
 .title-container {
-  height: 10vh;
-  min-height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 30px;
+  width: 100%;
 }
 
 nav ul {
   list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 nav li {
-  width: 55%;
   margin: 5% 0;
-  padding-bottom: 2.5%;
+  padding: 5% 0 5% 15%;
   text-transform: capitalize;
   cursor: pointer;
-  border-bottom: solid 1px black;
+}
+
+nav li:hover {
+  background-color: #a3ffe7;
 }
