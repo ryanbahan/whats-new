@@ -9,3 +9,7 @@ main {
   grid-auto-rows: min-content;
   padding: 2.5%;
 }
+
+a {
+  font-weight: bold;
+}
