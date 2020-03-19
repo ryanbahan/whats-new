@@ -73,13 +73,16 @@ class App extends Component {
     } else {
         return (
           <div className="app">
-            <Menu
-              items={this.state.defaultTopics}
-              clickHandler={this.changeTopic}
-              resetPage={this.resetPage}
-            />
             <div className="main-content-wrapper">
-              <SearchForm handleSubmit={this.searchArticles} />
+              <div class="nav-wrapper">
+                <Menu
+                  items={this.state.defaultTopics}
+                  clickHandler={this.changeTopic}
+                  resetPage={this.resetPage}
+                  location={this.state.location}
+                />
+                <SearchForm handleSubmit={this.searchArticles} />
+              </div>
               <NewsContainer articles={this.state.articles} />
             </div>
           </div>
