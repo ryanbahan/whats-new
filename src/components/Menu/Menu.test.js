@@ -23,6 +23,7 @@ describe('Menu', () => {
     function changeTopic() {
       done();
     }
+    
     const { getByText } = render(<Menu
                                     items={["entertainment", "local", "health", "technology", "science"]}
                                     clickHandler={changeTopic}
