@@ -1,20 +1,32 @@
 .search-field-container {
-  padding-top: 7.5px;
+  min-height: 85px;
   height: 10vh;
-  min-height: 50px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 0.5% 2.5% 0 2.5%;
 }
 
 .search-field-container button {
-  font-size: 1.25rem;
-  background-color: #fff;
-  padding: 0.5%;
-  min-width: 100px;
+  background-color: #a3ffe7;
+  border: solid 0.25px grey;
+  border-radius: 2.5%;
+  font-size: 1rem;
+  min-width: 50px;
+  height: 45%;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
 }
 
 .search-field-container input {
-  font-size: 1.25rem;
+  padding-left: 0.75%;
+  border: solid 0.25px grey;
+  font-size: 1rem;
+  height: 40%;
+  border-radius:  5px 0 0 5px;
+}
+
+.search-field-container input::placeholder {
+  /* padding-left: 5%; */
+  font-style: italic;
 }
