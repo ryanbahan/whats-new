@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Menu from '../Menu/Menu';
 import NewsContainer from '../NewsContainer/NewsContainer';
 import SearchForm from '../SearchForm/SearchForm';
+import LoadingAnimation from '../SpringAnimation/SpringAnimation'
 import './App.css';
 
 class App extends Component {
@@ -67,14 +68,13 @@ class App extends Component {
   }
 
   render () {
-    console.log(this.state.articles);
     if (this.state.isLoading) {
-      return <p>loading</p>
+      return <LoadingAnimation />
     } else {
         return (
           <div className="app">
             <div className="main-content-wrapper">
-              <div class="nav-wrapper">
+              <div className="nav-wrapper">
                 <Menu
                   items={this.state.defaultTopics}
                   clickHandler={this.changeTopic}
