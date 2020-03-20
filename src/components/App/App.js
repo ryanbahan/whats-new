@@ -16,9 +16,9 @@ class App extends Component {
     }
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.getArticlesByTopic();
-    await this.getCity();
+    this.getCity();
   }
 
   getArticlesByTopic(topic = "all") {
