@@ -24,7 +24,7 @@ class App extends Component {
   getArticlesByTopic(topic = "all") {
     this.setState({ isLoading: true });
 
-    fetch(`https://newsapi.org/v2/everything?q=${topic}&pageSize=100&apiKey=0c233b7671024689a5e269b225a9122e`)
+    fetch(`https://newsapi.org/v2/everything?q=${topic}&pageSize=100&apiKey=18eaa4f81613442b9e4c4b90f0d7d69f`)
       .then(response => response.json())
       .then(data => this.setState({articles: data.articles, isLoading: false}))
   }
